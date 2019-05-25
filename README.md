@@ -40,11 +40,17 @@ In [paper](https://arxiv.org/pdf/1810.00319.pdf), see 2 - 1 - (3)
 In [paper](https://arxiv.org/pdf/1810.00319.pdf), see 2 - 3 - (8)
 
 
-# Result
+# Result: Point Emb VS HIB Emb
 
-- Point Emb VS HIB Emb
+- Input image 80: clean vs occlusion
 
-![result]()
+![80c](./result/result21_80.png)
+![800](./result/result20_80.png)
+
+- Input image 58: clean vs occlusion
+
+![80c](./result/result39_58.png)
+![800](./result/result40_58.png)
 
 # Reference
 
