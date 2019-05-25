@@ -49,8 +49,8 @@ In [paper](https://arxiv.org/pdf/1810.00319.pdf), see 2 - 3 - (8)
 
 - Input image 58: clean vs occlusion
 
-![80c](./result/result39_58.png)
-![800](./result/result40_58.png)
+![58c](./result/result39_58.png)
+![58o](./result/result38_58.png)
 
 # Reference
 
