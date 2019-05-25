@@ -16,27 +16,14 @@ parser.add_argument('-samples', type=int, default=100, help="sampling")
 parser.add_argument('-n_samples', type=int, default=50, help="train or test images")
 parser.add_argument('-d_output', type=int, default=2, help="dimension of model ouput")
 parser.add_argument('-batch_size', type=int, default=64, help="dimension of model ouput")
-parser.add_argument('-n_filter', type=int, default=5, help="dimension of model ouput")
+parser.add_argument('-n_filter', type=int, default=3, help="dimension of model ouput")
 parser.add_argument('-model', type=str, default="point", help="training model")
 parser.add_argument('-testpath', type=str, default="test.tfrecord", help="test path")
 parser.add_argument('-tfrecordpath', type=str, default="train.tfrecord", help="dimension of model ouput")
 parser.add_argument('-actv', type=str, default="relu", help="dimension of model ouput")
-
 args = parser.parse_args()
 
 dataloader = Dataloader(args)
-
-@tf.function
-def train(model, loss_fn, dataset, optimizer):
-    variables = model.trainable_variables
-    for i in range(args.epoch):
-        for x_batch, y_batch in dataset:
-            with tf.GradientTape(watch_accessed_variables=True) as tape:
-                prediction = model(x_batch)
-                prob = prediction
-                loss = loss_fn(y_batch, prob)
-            gradients = tape.gradient(loss, variables)
-            optimizer.apply_gradients(zip(gradients, model.trainable_variables))
 
 
 if __name__ == "__main__":
