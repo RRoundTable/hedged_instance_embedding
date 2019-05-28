@@ -16,7 +16,20 @@ import tensorflow_probability as tfp
 from tensorflow.python.keras.losses import binary_crossentropy
 
 # loss function
-loss_func = binary_crossentropy
+def loss_func(y_true, y_pred):
+    """Log sum exp tricks
+    Check https://github.com/tensorflow/tensorflow/issues/172
+    y_true: a * (abs(z1-z2)) + b, shape of [batch_size, ]
+    y_pred: match, shape of [batch_size, ]
+    """
+    maxes = tf.where(tf.greater_equal(y_pred, 0),
+                     y_pred,
+                     tf.broadcast_to(0.0, shape=tf.shape(y_pred)))
+    z_x = tf.multiply(y_true, y_pred)
+    loglogit = tf.log(tf.broadcast_to(1.0, shape=tf.shape(y_pred))
+                      + tf.exp(tf.clip_by_value(-tf.abs(y_pred), -1e-8, 0)))
+    return maxes - z_x + loglogit
+
 # Common Layer
 class Get_Logit(Layer):
     def __init__(self):
